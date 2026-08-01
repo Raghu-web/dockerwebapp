@@ -37,7 +37,7 @@ jobs:
       - name: Debug Sonar Variables
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-       run: |
+        run: |
          echo "SONAR_HOST_URL=$SONAR_HOST_URL"
 
       - name: SonarQube Scan
