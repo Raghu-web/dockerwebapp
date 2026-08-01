@@ -1,1 +1,19 @@
+name: Java CI/CD Pipeline
 
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: self-hosted
+    # Your self-hosted runner must have:
+    # Java
+    # Maven
+    # Docker
+    # Trivy
+
+   steps:
+     - name: Checkout Source Code
+       uses: actions/checkout@v4
