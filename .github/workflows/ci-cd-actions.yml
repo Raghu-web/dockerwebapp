@@ -58,6 +58,10 @@ jobs:
         run: trivy image appimage
       - name: Scan Database Image
         run: trivy image dbimage
-          
+
+      - name: Deploy Docker images
+        run: |
+          docker run -d --name devopsdb -p 3306:3306 dbimage
+          docker run -d --name appcont -p 8080:8080 --link devopsdb:sqlconn appimage
 
       
