@@ -21,7 +21,9 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
           aws-region: us-east-1
-          role-to-assume: ${{secrets.AWS_IAM_ROLE}}
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+      - name: Getting AWS credentials
+        run: aws sts get-caller-identity
     
       - name: Set up Java
         uses: actions/setup-java@v4
