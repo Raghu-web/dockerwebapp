@@ -6,7 +6,10 @@ on:
     branches:
       - master
   workflow_dispatch:
-
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+  
 jobs:
   build:
     runs-on: self-hosted
@@ -14,7 +17,12 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
-        
+      - name: Configure AWS Credentials for North Verginia
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{secrets.AWS_IAM_ROLE}}
+    
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
