@@ -6,6 +6,9 @@ on:
     branches:
       - master
   workflow_dispatch:
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
 
 jobs:
   build:
@@ -14,6 +17,13 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
+      - name: Configure AWS Credentials for North Virginia region
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{secrets.AWS_IAM_ROLE}}
+      - name: get AWS credentials
+        run: aws sts get-caller-identity
         
       - name: Set up Java
         uses: actions/setup-java@v4
