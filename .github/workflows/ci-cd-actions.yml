@@ -12,7 +12,7 @@ permissions:
   
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest #change it to self hosted needs to run on EC2
 
     steps:
       - name: Checkout Source Code
